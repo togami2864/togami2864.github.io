@@ -1,18 +1,18 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import BlogHeader from "../components/BlogHeader.astro";
-import BlogPostPreview from "../components/BlogPostPreview.astro";
+import BaseHead from '../components/BaseHead.astro';
+import BlogHeader from '../components/BlogHeader.astro';
+import BlogPostPreview from '../components/BlogPostPreview.astro';
 
 interface MarkdownFrontmatter {
   publishDate: number;
 }
 
-const title = "STUDY DIALY";
-const description = "Memo about What I Leraned";
+const title = 'STUDY DIALY';
+const description = 'Memo about What I Leraned';
 // TODO fix
-let permalink = "https://example.com/";
+let permalink = 'https://example.com/';
 
-let allPosts = Astro.fetchContent<MarkdownFrontmatter>("./posts/*.md");
+let allPosts = Astro.fetchContent<MarkdownFrontmatter>('./posts/*.md');
 allPosts = allPosts.sort(
   (a, b) =>
     new Date(b.publishDate).valueOf() - new Date(a.publishDate).valueOf()
