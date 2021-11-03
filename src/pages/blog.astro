@@ -1,17 +1,22 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import BlogHeader from '../components/BlogHeader.astro';
-import { Markdown } from 'astro/components';
+import BlogPostPreview from '../components/BlogPostPreview.astro';
 
 interface MarkdownFrontmatter {
   publishDate: number;
 }
 
-const title = 'Top page';
-const description = 'togami2864 profile';
+const title = 'Tech';
+const description = 'Writing about What I Leraned About Tech';
 // TODO fix
 let permalink = 'https://example.com/';
 
+let allPosts = Astro.fetchContent<MarkdownFrontmatter>('./posts/*.md');
+allPosts = allPosts.sort(
+  (a, b) =>
+    new Date(b.publishDate).valueOf() - new Date(a.publishDate).valueOf()
+);
 ---
 
 <html lang="ja">
@@ -36,25 +41,11 @@ let permalink = 'https://example.com/';
     <div class="layout">
       <article class="content">
         <section class="intro">
-          <h1 class="latest">Hi👋</h1>
-          <p>This is togami2864's website</p>
+          <h1 class="latest">{title}</h1>
+          <p>{description}</p>
         </section>
         <section>
-          <h1 class="latest">🤔Who am I?</h1>
-          <Markdown>
-          </Markdown>
-        </section>
-        <section>
-          <h1 class="latest">🖥️Skills</h1>
-        </section>
-        <section>
-          <h1 class="latest">🔥Interests</h1>
-        </section>
-        <section>
-          <h1 class="latest">👻Experience</h1>
-        </section>
-        <section>
-          <h1 class="latest">✔️Links</h1>
+          {allPosts.map((p) => <BlogPostPreview post={p} />)}
         </section>
       </article>
     </div>
