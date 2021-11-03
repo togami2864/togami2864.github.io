@@ -3,15 +3,10 @@ import BaseHead from '../components/BaseHead.astro';
 import BlogHeader from '../components/BlogHeader.astro';
 import { Markdown } from 'astro/components';
 
-interface MarkdownFrontmatter {
-  publishDate: number;
-}
-
 const title = 'Top page';
 const description = 'togami2864 profile';
 // TODO fix
 let permalink = 'https://example.com/';
-
 ---
 
 <html lang="ja">
@@ -42,6 +37,16 @@ let permalink = 'https://example.com/';
         <section>
           <h1 class="latest">🤔Who am I?</h1>
           <Markdown>
+          ### Student
+          I'm a junior university student majoring in electronic engineering. Computer science is not my field of expertise, but also studying myself about it.
+          ### Frontend developer
+          I started kind of totally not web staff doing everything from **C** up to within **html/css**, **javascript** and **React.js** and have experience working with them as an intership student.
+          ### Love
+          - Do programming
+          - Contributing to OSS
+          - Waching Movie
+          - Scuba diving(Of cource the pandemic ruined all of my plan...)
+
           </Markdown>
         </section>
         <section>
