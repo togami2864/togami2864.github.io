@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import BlogHeader from '../components/BlogHeader.astro';
 import BlogPostPreview from '../components/BlogPostPreview.astro';
+import Footer from '../components/Footer.astro';
 
 interface MarkdownFrontmatter {
   publishDate: number;
@@ -19,7 +20,7 @@ allPosts = allPosts.sort(
 );
 ---
 
-<html lang="ja">
+<html lang="en">
   <head>
     <BaseHead {title} {description} {permalink} />
     <link rel="stylesheet" href="/blog.css" />
@@ -29,10 +30,10 @@ allPosts = allPosts.sort(
       --gutter: 0.5rem; --doc-padding: 2rem; } header { width: 100%; height:
       100%; background-color: var(--theme-bg-offset); display: flex;
       align-items: center; justify-content: center; } .content { margin-top:
-      4rem; margin-bottom: 8rem; } .content :global(main > * + *) { margin-top:
-      1rem; } .intro { padding-bottom: 4rem; margin-bottom: 2rem; border-bottom:
+      2rem; margin-bottom: 1rem; } .content :global(main > * + *) { margin-top:
+      1rem; } .intro { padding-bottom: 1rem; margin-bottom: 1rem; border-bottom:
       4px solid var(--theme-divider); } .intro > * { margin: 0; } .latest {
-      font-size: 2.5rem; font-weight: 700; }
+      font-size: 2.5rem; font-weight: 700; } div.center{ text-align: center;}
     </style>
   </head>
 
@@ -45,9 +46,25 @@ allPosts = allPosts.sort(
           <p>{description}</p>
         </section>
         <section>
-          {allPosts.map((p) => <BlogPostPreview post={p} />)}
+          <BlogPostPreview post={allPosts[0]} />
         </section>
+        <div class="center">
+          <a class="link_all_posts">Read All Posts</a>
+        </div>
+      </article>
+      <article class="content">
+        <section class="intro">
+          <h1 class="latest">Daily</h1>
+          <p>My daily life</p>
+        </section>
+        <section>
+          <BlogPostPreview post={allPosts[0]} />
+        </section>
+        <div class="center">
+          <a>Read All Posts</a>
+        </div>
       </article>
     </div>
+    <Footer />
   </body>
 </html>
