@@ -1,8 +1,8 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import BlogHeader from '../components/BlogHeader.astro';
-import BlogPostPreview from '../components/BlogPostPreview.astro';
-import Footer from '../components/Footer.astro';
+import BaseHead from '../../components/BaseHead.astro';
+import BlogHeader from '../../components/BlogHeader.astro';
+import BlogPostPreview from '../../components/BlogPostPreview.astro';
+import Footer from '../../components/Footer.astro';
 
 interface MarkdownFrontmatter {
   publishDate: number;
@@ -13,7 +13,7 @@ const description = 'Writing about What I Leraned About Tech';
 // TODO fix
 let permalink = 'https://example.com/';
 
-let allPosts = Astro.fetchContent<MarkdownFrontmatter>('./posts/*.md');
+let allPosts = Astro.fetchContent<MarkdownFrontmatter>('./tech/posts/*.md');
 allPosts = allPosts.sort(
   (a, b) =>
     new Date(b.publishDate).valueOf() - new Date(a.publishDate).valueOf()
@@ -31,9 +31,9 @@ allPosts = allPosts.sort(
       100%; background-color: var(--theme-bg-offset); display: flex;
       align-items: center; justify-content: center; } .content { margin-top:
       2rem; margin-bottom: 1rem; } .content :global(main > * + *) { margin-top:
-      1rem; } .intro { padding-bottom: 1rem; margin-bottom: 1rem; border-bottom:
-      4px solid var(--theme-divider); } .intro > * { margin: 0; } .latest {
-      font-size: 2.5rem; font-weight: 700; } div.center{ text-align: center;}
+      1rem; } .intro { padding-bottom: 1rem;  border-bottom:4px solid var(--theme-divider); }
+      .intro > * { margin: 0; } .latest {font-size: 2.5rem; font-weight: 700; }
+      div.center{ text-align: center;}
     </style>
   </head>
 
@@ -49,7 +49,7 @@ allPosts = allPosts.sort(
           <BlogPostPreview post={allPosts[0]} />
         </section>
         <div class="center">
-          <a>See All Posts</a>
+          <a href="/blog/tech/">See All Posts(Tech)</a>
         </div>
       </article>
       <article class="content">
@@ -61,7 +61,7 @@ allPosts = allPosts.sort(
           <BlogPostPreview post={allPosts[0]} />
         </section>
         <div class="center">
-          <a>See All Posts</a>
+          <a href="/blog/daily/">See All Posts(Daily)</a>
         </div>
       </article>
     </div>

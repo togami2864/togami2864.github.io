@@ -1,0 +1,59 @@
+---
+import BaseHead from '../../../components/BaseHead.astro';
+import BlogHeader from '../../../components/BlogHeader.astro';
+import BlogPostPreview from '../../../components/BlogPostPreview.astro';
+import Footer from '../../../components/Footer.astro';
+
+interface MarkdownFrontmatter {
+  publishDate: number;
+}
+
+const title = 'Tech';
+const description = 'Writing about What I Leraned About Tech';
+// TODO fix
+let permalink = 'https://example.com/';
+
+let allPosts = Astro.fetchContent<MarkdownFrontmatter>('./posts/*.md');
+allPosts = allPosts.sort(
+  (a, b) =>
+    new Date(b.publishDate).valueOf() - new Date(a.publishDate).valueOf()
+);
+---
+
+<html lang="en">
+  <head>
+    <BaseHead {title} {description} {permalink} />
+    <link rel="stylesheet" href="/blog.css" />
+
+    <style>
+      body { width: 100%; display: grid; grid-template-rows: 3.5rem 1fr;
+      --gutter: 0.5rem; --doc-padding: 2rem; } header { width: 100%; height:
+      100%; background-color: var(--theme-bg-offset); display: flex;
+      align-items: center; justify-content: center; } .content { margin-top:
+      4rem; margin-bottom: 8rem; } .content :global(main > * + *) { margin-top:
+      1rem; } .intro { padding-bottom: 1rem; border-bottom: 4px solid var(--theme-divider); }
+      .intro > * { margin: 0; } .latest {font-size: 2.5rem; font-weight: 700; }div.center{ text-align: center;}
+      p{font-size: 24px;}
+    </style>
+  </head>
+
+  <body>
+    <BlogHeader />
+    <div class="layout">
+      <article class="content">
+        <section class="intro">
+          <h1 class="latest">👨‍💻Posts(Tech)</h1>
+        </section>
+        <section>
+        {allPosts.map((p)=> (
+          <BlogPostPreview post={p} />
+        ))}
+        </section>
+      </article>
+    </div>
+    <div class="center">
+      <a href="/blog"><p>Back</p></a>
+    </div>
+    <Footer />
+  </body>
+</html>
