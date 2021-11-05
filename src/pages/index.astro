@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import BlogHeader from '../components/BlogHeader.astro';
 import Footer from '../components/Footer.astro';
+import { Github, Twitter, LinkedIn } from '../components/icon/SocialIcons.tsx';
 import { Markdown } from 'astro/components';
 
 const title = 'Top page';
@@ -65,6 +66,9 @@ let permalink = 'https://example.com/';
         </section>
         <section>
           <h1 class="latest">✔️ Links</h1>
+          <a href="https://github.com/togami2864" target="_blank" rel="noopener noreferrer"><Github/></a>
+          <a href="https://github.com/togami2864" target="_blank" rel="noopener noreferrer"><Twitter/></a>
+          <a href="https://www.linkedin.com/in/togami2864/" target="_blank" rel="noopener noreferrer"><LinkedIn/></a>
         </section>
       </article>
     </div>
