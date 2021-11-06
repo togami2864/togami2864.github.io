@@ -13,8 +13,14 @@ const description = 'Writing about What I Leraned About Tech';
 // TODO fix
 let permalink = 'https://example.com/';
 
-let allPosts = Astro.fetchContent<MarkdownFrontmatter>('./tech/posts/*.md');
-allPosts = allPosts.sort(
+let techPosts = Astro.fetchContent<MarkdownFrontmatter>('./tech/posts/*.md');
+techPosts = techPosts.sort(
+  (a, b) =>
+    new Date(b.publishDate).valueOf() - new Date(a.publishDate).valueOf()
+);
+
+let dailyPosts = Astro.fetchContent<MarkdownFrontmatter>('./daily/posts/*.md');
+dailyPosts = dailyPosts.sort(
   (a, b) =>
     new Date(b.publishDate).valueOf() - new Date(a.publishDate).valueOf()
 );
@@ -46,7 +52,7 @@ allPosts = allPosts.sort(
           <p>👨‍💻Writing about What I Leraned About Tech</p>
         </section>
         <section>
-          <BlogPostPreview post={allPosts[0]} />
+          <BlogPostPreview post={techPosts[0]} />
         </section>
         <div class="center">
           <a href="/blog/tech/">See All Posts(Tech)</a>
@@ -58,7 +64,7 @@ allPosts = allPosts.sort(
           <p>🐕My daily life</p>
         </section>
         <section>
-          <BlogPostPreview post={allPosts[0]} />
+          <BlogPostPreview post={dailyPosts[0]} />
         </section>
         <div class="center">
           <a href="/blog/daily/">See All Posts(Daily)</a>
