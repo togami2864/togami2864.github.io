@@ -10,10 +10,10 @@ export interface Props {
   alt: string;
 }
 
-const isJapanese = Astro.request.url.pathname.includes("ja");
-const isEnAvailable = true;
-const isJaAvailable = false;
-const { title, author, publishDate, heroImage, alt } = Astro.props;
+const { title, author, publishDate, heroImage, alt, lang , i18} = Astro.props;
+const isJapanese = lang == 'ja' ? true : false;
+const isEnAvailable = lang == 'en' || i18 == 'en';
+const isJaAvailable = lang == 'ja' || i18 == 'ja';
 ---
 
 <div class="layout">
@@ -24,7 +24,7 @@ const { title, author, publishDate, heroImage, alt } = Astro.props;
         <p class="publish-date">{publishDate}</p>
         <h1 class="title">{title}</h1>
         <Author name={author} href="https://twitter.com/togami2864" />
-        <Lang isJapanese={isJapanese} isEnAvailable={isEnAvailable} isJaAvailable={isJaAvailable}client:only/>
+        <Lang isJapanese={isJapanese} isEnAvailable={isEnAvailable} isJaAvailable={isJaAvailable} title={title} client:only/>
       </header>
       <main>
         <slot />

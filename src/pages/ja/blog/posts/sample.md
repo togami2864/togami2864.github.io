@@ -1,11 +1,13 @@
 ---
-title: '日本語版'
+title: 'sample'
 description: "We're excited to announce Astro as a new way to build static websites and deliver lightning-fast performance without sacrificing a modern developer experience."
 publishDate: 'Tuesday, June 8 2021'
 author: '@togami2864'
 heroImage: '/social.jpg'
 alt: 'Astro'
 layout: '../../../../layouts/BlogPost.astro'
+lang: 'ja'
+i18: 'en'
 ---
 
 There's a simple secret to building a faster website — _just ship less_.

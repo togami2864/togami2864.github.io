@@ -1,11 +1,13 @@
 ---
-title: 'Introducing Astro: Ship Less JavaScript'
+title: 'sample'
 description: "We're excited to announce Astro as a new way to build static websites and deliver lightning-fast performance without sacrificing a modern developer experience."
 publishDate: 'Tuesday, June 8 2021'
 author: '@togami2864'
 heroImage: '/social.jpg'
 alt: 'Astro'
 layout: '../../../layouts/BlogPost.astro'
+lang: 'en'
+i18: 'ja'
 ---
 
 There's a simple secret to building a faster website — _just ship less_.

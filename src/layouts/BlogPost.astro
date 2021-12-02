@@ -8,7 +8,7 @@ import Footer from '@components/Footer.astro'
 import { getHeroImage } from '../utils/getHeroImage';
 
 const { content } = Astro.props;
-const { title, description, publishDate, author, permalink, alt } = content;
+const { title, description, publishDate, author, permalink, alt , lang, i18} = content;
 const heroImage = getHeroImage();
 ---
 
@@ -20,7 +20,7 @@ const heroImage = getHeroImage();
 
   <body>
     <BlogHeader />
-    <BlogPost {title} {author} {heroImage} {publishDate} {alt}>
+    <BlogPost {title} {author} {heroImage} {publishDate} {alt} {lang} {i18}>
       <slot />
     </BlogPost>
     <Button/>
