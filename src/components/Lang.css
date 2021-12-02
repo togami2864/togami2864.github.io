@@ -1,0 +1,6 @@
+.lang {
+  display: flex;
+}
+.current_lang {
+  font-weight: 800;
+}

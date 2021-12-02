@@ -1,5 +1,6 @@
 ---
 import Author from './Author.astro';
+import { Lang }from './Lang.tsx';
 
 export interface Props {
   title: string;
@@ -9,6 +10,7 @@ export interface Props {
   alt: string;
 }
 
+const isJaVer = Astro.request.url.pathname.includes("ja");
 const { title, author, publishDate, heroImage, alt } = Astro.props;
 ---
 
@@ -20,6 +22,7 @@ const { title, author, publishDate, heroImage, alt } = Astro.props;
         <p class="publish-date">{publishDate}</p>
         <h1 class="title">{title}</h1>
         <Author name={author} href="https://twitter.com/togami2864" />
+        <Lang isJaver={isJaVer} client:only/>
       </header>
       <main>
         <slot />

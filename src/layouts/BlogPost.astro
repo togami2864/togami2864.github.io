@@ -2,6 +2,8 @@
 import BaseHead from '../components/BaseHead.astro';
 import BlogHeader from '../components/BlogHeader.astro';
 import BlogPost from '../components/BlogPost.astro';
+import Button from '../components/Button.astro';
+import Footer from '../components/Footer.astro'
 
 import { getHeroImage } from '../utils/getHeroImage';
 
@@ -21,5 +23,7 @@ const heroImage = getHeroImage();
     <BlogPost {title} {author} {heroImage} {publishDate} {alt}>
       <slot />
     </BlogPost>
+    <Button/>
+    <Footer/>
   </body>
 </html>
