@@ -15,6 +15,10 @@
     "prettier": "^2.4.1"
   },
   "dependencies": {
-    "@astrojs/renderer-react": "^0.3.0"
+    "@astrojs/renderer-react": "^0.3.0",
+    "@chakra-ui/react": "^1.7.2",
+    "@emotion/react": "^11.7.0",
+    "@emotion/styled": "^11.6.0",
+    "framer-motion": "^4.1.17"
   }
 }
