@@ -13,7 +13,6 @@ export const Lang: React.FC<LangProps> = ({
   isEnAvailable,
   isJaAvailable,
 }) => {
-  console.log(isEnAvailable);
   return (
     <>
       <div className="lang">
