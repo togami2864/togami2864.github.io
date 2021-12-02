@@ -1,9 +1,18 @@
 // @ts-check
-
+import path from 'path';
 /** @type {import('astro').AstroUserConfig} */
 export default {
   renderers: ['@astrojs/renderer-react'],
   vite: {
     plugins: [],
+    resolve: {
+      alias: {
+        '@components/*': path.join(
+          // @ts-ignore
+          path.dirname(new URL(import.meta.url).pathname),
+          './src/components'
+        ),
+      },
+    },
   },
 };
