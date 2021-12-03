@@ -1,8 +1,9 @@
 env:
   githubEmail: tuabobo123@gmail.com
   deployToRepo: web
+  NODE_ENV: production
 
-name: Github Pages Astro CI
+name: deploy
 
 on:
   push:
@@ -17,6 +18,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
