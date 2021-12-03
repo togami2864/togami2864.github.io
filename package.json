@@ -7,18 +7,22 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "format": "prettier -w"
+    "format": "prettier -w",
+    "gen:ogp": "npx ts-node ./scripts/genOgp.ts"
   },
   "devDependencies": {
     "@astrojs/renderer-preact": "^0.3.0",
     "astro": "^0.21.4",
-    "prettier": "^2.4.1"
+    "prettier": "^2.4.1",
+    "ts-node": "^10.4.0"
   },
   "dependencies": {
     "@astrojs/renderer-react": "^0.3.0",
     "@chakra-ui/react": "^1.7.2",
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
-    "framer-motion": "^4.1.17"
+    "framer-motion": "^4.1.17",
+    "gray-matter": "^4.0.3",
+    "node-html-to-image": "^3.2.0"
   }
 }
