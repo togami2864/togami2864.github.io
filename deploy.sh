@@ -15,6 +15,6 @@ touch .nojekyll
 git init
 git add -A
 git commit -m 'deploy'
-
+git push -f git@github.com:togami2864/togami2864.github.io.git main
 
 cd -

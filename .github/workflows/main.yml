@@ -3,7 +3,7 @@ env:
   deployToRepo: web
   NODE_ENV: production
 
-name: Github Pages Astro 
+name: Github Pages Astro CI
 
 on:
   push:
