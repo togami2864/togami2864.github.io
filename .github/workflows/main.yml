@@ -1,7 +1,6 @@
 env:
   githubEmail: tuabobo123@gmail.com
   deployToRepo: web
-  NODE_ENV: production
 
 name: Github Pages Astro CI
 
