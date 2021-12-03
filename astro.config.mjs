@@ -4,7 +4,7 @@ import path from 'path';
 export default {
   renderers: ['@astrojs/renderer-react'],
   buildOptions: {
-    site: '',
+    site: 'https://togami2864.github.io/web/',
   },
   vite: {
     plugins: [],
