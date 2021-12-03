@@ -8,7 +8,6 @@
     "build": "astro build",
     "preview": "astro preview",
     "format": "prettier -w",
-    "postbuild": "node ./scripts/postbuild.mjs -path https://togami2864.github.io/web/",
     "gen:ogp": "npx ts-node ./scripts/genOgp.ts"
   },
   "devDependencies": {
