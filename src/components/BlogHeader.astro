@@ -1,13 +1,18 @@
+---
+const {lang} = Astro.props;
+const linkToHome = lang == 'en' ? "/" : "/ja/";
+const linkToBlog = lang == 'en' ? "/blog" : "/ja/blog";
+---
 <header class="layout">
   <article>
     <h1>
-      <a href="/">
+      <a href={linkToHome}>
         <span>togami2864</span>
       </a>
       <nav>
       <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/blog/">Blog</a></li>
+        <li><a href={linkToHome}>Home</a></li>
+        <li><a href={linkToBlog}>Blog</a></li>
         <li><a>Garelly</a></li>
       </ul>
       </nav>

@@ -7,19 +7,18 @@ import Footer from '@components/Footer.astro'
 
 import { getHeroImage } from '../utils/getHeroImage';
 
-const { content } = Astro.props;
-const { title, description, publishDate, author, permalink, alt , lang, i18} = content;
+const { title, description, publishDate, author, permalink, alt , lang, i18 } = Astro.props.content;
 const heroImage = getHeroImage();
 ---
 
-<html lang={content.lang || 'ja'}>
+<html lang={lang}>
   <head>
     <BaseHead {title} {description} {permalink} />
     <link rel="stylesheet" href="/blog.css" />
   </head>
 
   <body>
-    <BlogHeader />
+    <BlogHeader lang={lang}/>
     <BlogPost {title} {author} {heroImage} {publishDate} {alt} {lang} {i18}>
       <slot />
     </BlogPost>
