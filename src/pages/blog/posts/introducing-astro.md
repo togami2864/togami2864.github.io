@@ -8,6 +8,7 @@ alt: 'Astro'
 layout: '../../../layouts/BlogPost.astro'
 lang: 'en'
 i18: ''
+filename: 'introducing-astro'
 ---
 
 There's a simple secret to building a faster website — _just ship less_.
