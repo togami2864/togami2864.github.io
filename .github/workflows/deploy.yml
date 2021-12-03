@@ -23,7 +23,7 @@ jobs:
 
       - name: Build
         run: |
-          npm run prebuild
+          npm run postbuild
           npm run build
           touch ./dist/.nojekyll
 
