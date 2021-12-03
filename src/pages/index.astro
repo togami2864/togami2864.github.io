@@ -13,9 +13,9 @@ let permalink = 'https://example.com/';
 
 <Base title={title} descripton={description} permalink={permalink} lang='en'>
   <section class="intro">
-          <h1 class="latest">Hi👋</h1>
-          <p>This is togami2864's website / <a href="/ja/">switch to JP Version</a></p>
-        </section>
+    <h1 class="latest">Hi👋</h1>
+    <p>This is togami2864's website / <a href="/ja/">switch to JP🇯🇵 Version</a></p>
+  </section>
         <section>
           <h1 class="latest">🤔 Who am I?</h1>
           <Markdown>
@@ -102,7 +102,8 @@ let permalink = 'https://example.com/';
 
 <style>
  .intro > * { margin: 0; }
-
+ .intro { padding-bottom: 1rem; margin-bottom: 2rem; border-bottom:
+      4px solid var(--theme-divider); }
  .latest {
       font-size: 2.5rem; font-weight: 700; }
 </style>
