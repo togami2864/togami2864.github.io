@@ -58,7 +58,7 @@ if ((argvs[0] === '--p' || argvs[0] === '-path') && argvs[1]) {
     });
   };
 
-  if (PRODUCTION_URL && process.env.NODE_ENV === 'production') {
+  if (PRODUCTION_URL) {
     replaceUrlsInFiles(PUBLIC_DIR, files);
   } else {
     console.log('skip postbuild');
