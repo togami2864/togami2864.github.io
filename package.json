@@ -5,24 +5,25 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
+    "postbuild": "node ./scripts/postbuild.mjs -path https://togami2864.github.io/web/",
     "build": "astro build",
     "preview": "astro preview",
     "format": "prettier -w",
     "gen:ogp": "npx ts-node ./scripts/genOgp.ts"
   },
   "devDependencies": {
-    "@astrojs/renderer-preact": "^0.3.0",
-    "astro": "^0.21.4",
-    "prettier": "^2.4.1",
-    "ts-node": "^10.4.0"
+    "prettier": "^2.4.1"
   },
   "dependencies": {
+    "@astrojs/renderer-preact": "^0.3.1",
     "@astrojs/renderer-react": "^0.3.0",
     "@chakra-ui/react": "^1.7.2",
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
+    "astro": "^0.21.8",
     "framer-motion": "^4.1.17",
     "gray-matter": "^4.0.3",
-    "node-html-to-image": "^3.2.0"
+    "node-html-to-image": "^3.2.0",
+    "ts-node": "^10.4.0"
   }
 }
