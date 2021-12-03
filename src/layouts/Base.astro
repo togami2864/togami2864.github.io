@@ -3,12 +3,12 @@ import BaseHead from '@components/BaseHead.astro';
 import BlogHeader from '@components/BlogHeader.astro';
 import Footer from '@components/Footer.astro';
 
-const {title, description, permalink, lang} = Astro.props;
+const {title, description, permalink, lang, i18} = Astro.props;
 ---
 
 <html lang={lang}>
   <head>
-    <BaseHead {title} {description} {permalink} />
+    <BaseHead {title} {description} {permalink} {i18}/>
     <link rel="stylesheet" href="/blog.css" />
 
     <style>

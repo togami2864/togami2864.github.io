@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const LangSelector: React.FC = ({ initLang }) => {
+export const LangSelector: React.FC = ({ initLang, translation }) => {
   const [lang, setLang] = useState(initLang);
   const changeLang = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setLang(e.target.value);
@@ -9,7 +9,11 @@ export const LangSelector: React.FC = ({ initLang }) => {
       /\/([a-z]{2}-?[A-Z]{0,2})\//,
       '/'
     );
-    window.location.pathname = newLang + actualDest;
+    if (translation === '') {
+      window.location.pathname = newLang;
+    } else {
+      window.location.pathname = newLang + actualDest;
+    }
   };
 
   return (
