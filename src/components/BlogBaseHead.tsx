@@ -15,7 +15,9 @@ export const BlogBaseHead: React.FC<BlogBaseHeadProps> = ({
   lang,
 }) => {
   const ogpUrl =
-    lang != 'ja' ? `/ogp/${filename}.png` : `/ogp/ja/${filename}.png`;
+    lang != 'ja'
+      ? `https://togami2864.github.io/ogp/${filename}.png`
+      : `https://togami2864.github.io/ogp/ja/${filename}.png`;
   const url =
     lang != 'ja'
       ? `https://togami2864.github.io/${filename}/`
