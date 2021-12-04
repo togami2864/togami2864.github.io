@@ -3,7 +3,7 @@ import { embedTitle } from './embedTitle';
 import fs from 'fs';
 import grayMatter from 'gray-matter';
 
-const OUTPUTPATH = process.cwd() + '/public/assets/blog/';
+const OUTPUTPATH = process.cwd() + '/public/ogp/';
 
 const POSTS_IN_ENGLISH = '/src/pages/blog/posts';
 const POSTS_IN_JAPANESE = '/src/pages/ja/blog/posts';
@@ -31,7 +31,7 @@ const genArticleOGP = async (path) => {
         },
       })
         .then(() =>
-          console.log(`${filename.replace(/\.[^/.]+$/, '')}: success!!`)
+          console.log(`success:  ${filename.replace(/\.[^/.]+$/, '')}`)
         )
         .catch((e) => {
           console.error(e);
