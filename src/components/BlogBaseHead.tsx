@@ -11,7 +11,6 @@ interface BlogBaseHeadProps {
 export const BlogBaseHead: React.FC<BlogBaseHeadProps> = ({
   title,
   description,
-  permalink,
   filename,
   lang,
 }) => {
