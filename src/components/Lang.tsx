@@ -23,6 +23,7 @@ export const Lang: React.FC<LangProps> = ({
         <Tooltip
           label="Sorry😢 English version is unavailable"
           isDisabled={isEnAvailable}
+          placement="bottom"
         >
           <a
             href={linkToEn}
@@ -41,6 +42,7 @@ export const Lang: React.FC<LangProps> = ({
         <Tooltip
           label="Sorry😢 Japanese version is unavailable"
           isDisabled={isJaAvailable}
+          placement="bottom"
         >
           <a
             href={linkToJa}
