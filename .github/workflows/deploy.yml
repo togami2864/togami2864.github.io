@@ -1,6 +1,6 @@
 env:
   githubEmail: tuabobo123@gmail.com
-  deployToRepo: web
+  deployToRepo: togami2864.github.io
 
 name: Github Pages Astro CI
 

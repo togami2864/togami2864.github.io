@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "postbuild": "node ./postbuild.mjs -path https://togami2864.github.io/web/",
     "build": "astro build",
     "preview": "astro preview",
     "format": "prettier -w",
