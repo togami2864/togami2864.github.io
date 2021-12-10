@@ -7,10 +7,10 @@ interface MarkdownFrontmatter {
   publishDate: number;
 }
 
-const title = 'Tech';
-const description = 'Writing about What I Leraned About Tech';
+const title = 'togami2864';
+const description = 'Writing about tech & my daily life';
 // TODO fix
-let permalink = 'https://example.com/';
+let permalink = 'https://togami2864.github.io/ja/blog/';
 
 let allPosts = Astro.fetchContent<MarkdownFrontmatter>('./posts/*.md');
 allPosts = allPosts.sort(
