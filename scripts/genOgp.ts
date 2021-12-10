@@ -12,14 +12,20 @@ const jaArticles = process.cwd() + POSTS_IN_JAPANESE;
 
 const genArticleOGP = async (path) => {
   const filenames = await fs.readdirSync(path);
-  Promise.all(
+  await Promise.all(
     filenames.map(async (filename) => {
       const filepath = path + '/' + filename;
+
       const fileData = await fs.readFileSync(filepath, {
         encoding: 'utf-8',
       });
       const { data } = grayMatter(fileData);
       const outputDir = data.lang != 'ja' ? OUTPUTPATH : OUTPUTPATH + `ja/`;
+      if (
+        fs.existsSync(outputDir + `${filename.replace(/\.[^/.]+$/, '')}.png`)
+      ) {
+        return Promise.resolve('already exists!! skip this.');
+      }
       nodeHtmlToImage({
         output: outputDir + `${filename.replace(/\.[^/.]+$/, '')}.png`,
         html: embedTitle(data.title),
@@ -41,6 +47,9 @@ const genArticleOGP = async (path) => {
 };
 
 (async () => {
+  const startTime = performance.now();
   await genArticleOGP(enArticles);
   await genArticleOGP(jaArticles);
+  const endTime = performance.now();
+  console.log(endTime - startTime);
 })();
