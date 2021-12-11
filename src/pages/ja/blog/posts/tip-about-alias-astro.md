@@ -12,7 +12,7 @@ filename: 'tip-about-alias-astro'
 
 `Astro v0.21.0`にて`Vite`による新たなビルドエンジンが提供されました。
 そのため、`Vite`が提供しているaliasの設定をastroのプロジェクトでも行うことができます。
-結論から言っておくと reactやvueのプロジェクトにおける `Vite` での `alias` の設定方法と何も変わりません。たったの2ステップです。
+ReactやVueのプロジェクトにおける `Vite` での `alias` の設定方法と何も変わりません。たったの2ステップです。
 
 1. `astro.config.mjs` の `Vite` の項目で `alias` を設定
 2. エディタのサポートを有効にするため `tsconfig.json` の `paths` を設定
@@ -59,10 +59,12 @@ export default {
 }
 ```
 
+## 結果
 以上の設定を終えると次のようにコンポーネントのimportができるようになります。
 
 ```js
 import { Button } from '@/components/Button.astro'
+
 // src
 //  |- components
 //         | - Button.astro <- you can get it!!
