@@ -45,9 +45,9 @@ const genArticleOGP = async (path) => {
     })
   );
 };
+const startTime = performance.now();
 
 (async () => {
-  const startTime = performance.now();
   await genArticleOGP(enArticles);
   await genArticleOGP(jaArticles);
   const endTime = performance.now();

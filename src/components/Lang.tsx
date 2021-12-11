@@ -6,17 +6,17 @@ interface LangProps {
   isJapanese: boolean;
   isEnAvailable: boolean;
   isJaAvailable: boolean;
-  title: string;
+  filename: string;
 }
 
 export const Lang: React.FC<LangProps> = ({
   isJapanese,
   isEnAvailable,
   isJaAvailable,
-  title,
+  filename,
 }) => {
-  const linkToEn = `/blog/posts/${title}`;
-  const linkToJa = `/ja/blog/posts/${title}`;
+  const linkToEn = `/blog/posts/${filename}`;
+  const linkToJa = `/ja/blog/posts/${filename}`;
   return (
     <>
       <div className="lang">

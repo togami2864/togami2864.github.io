@@ -19,7 +19,7 @@ const heroImage = getHeroImage();
 
   <body>
     <BlogHeader lang={lang} translation={i18}/>
-    <BlogPost {title} {author} {heroImage} {publishDate} {alt} {lang} {i18}>
+    <BlogPost {title} {author} {heroImage} {publishDate} {alt} {lang} {i18} {filename}>
       <slot />
     </BlogPost>
     <Button/>

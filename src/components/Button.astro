@@ -1,5 +1,10 @@
+---
+const isJp = Astro.request.url.toString().match(/ja/);
+const homePath = isJp ? '/ja/blog' : '/blog';
+---
+
 <div class="to_home">
-    <a href="/blog">Back to Home</a>
+    <a href={homePath}>Back to Home</a>
 </div>
 
 <style>
