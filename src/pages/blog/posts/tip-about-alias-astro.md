@@ -2,7 +2,7 @@
 title: '[Tip]: How to add alias in your astro project'
 description: "Astro v0.21.0 got new build engine powered by Vite.
 So we can use the alias settings provided by Vite in your astro project."
-publishDate: 'Saturday, Dec 11 2021'
+publishDate: 'Saturday, Dec. 11 2021'
 author: '@togami2864'
 layout: '../../../layouts/BlogPost.astro'
 lang: 'en'

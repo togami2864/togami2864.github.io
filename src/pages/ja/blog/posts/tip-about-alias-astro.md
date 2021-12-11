@@ -2,7 +2,7 @@
 title: 'astroのプロジェクトでaliasを設定する'
 description: "Astro v0.21.0にてViteによる新たなビルドエンジンが提供されました。
 そのため、Viteが提供しているaliasの設定をastroのプロジェクトでも行うことができます。"
-publishDate: 'Saturday, Dec 11 2021'
+publishDate: 'Saturday, Dec. 11 2021'
 author: '@togami2864'
 layout: '../../../../layouts/BlogPost.astro'
 lang: 'ja'
