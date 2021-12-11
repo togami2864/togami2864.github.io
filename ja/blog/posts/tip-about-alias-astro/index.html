@@ -34,7 +34,7 @@
   <article class="content astro-WRHIPJZM">
     <div class="astro-WRHIPJZM">
       <header class="astro-WRHIPJZM">
-        <img width="720" height="420" class="hero-image astro-WRHIPJZM" loading="lazy" src="/hero/hero_6.jpeg">
+        <img width="720" height="420" class="hero-image astro-WRHIPJZM" loading="lazy" src="/hero/hero_4.jpeg">
         <p class="publish-date astro-WRHIPJZM">Saturday, Dec. 11 2021</p>
         <h1 class="title astro-WRHIPJZM">astroのプロジェクトでaliasを設定する</h1>
         
@@ -49,7 +49,7 @@
       <main class="astro-WRHIPJZM">
         <p><code data-astro-raw="">Astro v0.21.0</code>にて<code data-astro-raw="">Vite</code>による新たなビルドエンジンが提供されました。
 そのため、<code data-astro-raw="">Vite</code>が提供しているaliasの設定をastroのプロジェクトでも行うことができます。
-結論から言っておくと reactやvueのプロジェクトにおける <code data-astro-raw="">Vite</code> での <code data-astro-raw="">alias</code> の設定方法と何も変わりません。たったの2ステップです。</p><ol>
+ReactやVueのプロジェクトにおける <code data-astro-raw="">Vite</code> での <code data-astro-raw="">alias</code> の設定方法と何も変わりません。たったの2ステップです。</p><ol>
 <li><code data-astro-raw="">astro.config.mjs</code> の <code data-astro-raw="">Vite</code> の項目で <code data-astro-raw="">alias</code> を設定</li>
 <li>エディタのサポートを有効にするため <code data-astro-raw="">tsconfig.json</code> の <code data-astro-raw="">paths</code> を設定</li>
 </ol><h2 id="config設定">config設定</h2><p><code data-astro-raw="">src</code>ディレクトリを<code data-astro-raw="">@</code>で参照できるように設定してみます。</p><p>1:
@@ -74,7 +74,8 @@
       <span class="token property">"@/*"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"./src/*"</span><span class="token punctuation">]</span>
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span></code></pre><p>以上の設定を終えると次のようにコンポーネントのimportができるようになります。</p><pre class="language-js"><code data-astro-raw="" class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> Button <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/components/Button.astro'</span>
+<span class="token punctuation">}</span></code></pre><h2 id="結果">結果</h2><p>以上の設定を終えると次のようにコンポーネントのimportができるようになります。</p><pre class="language-js"><code data-astro-raw="" class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> Button <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/components/Button.astro'</span>
+
 <span class="token comment">// src</span>
 <span class="token comment">//  |- components</span>
 <span class="token comment">//         | - Button.astro &lt;- you can get it!!</span></code></pre>
