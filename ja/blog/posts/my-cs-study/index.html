@@ -1,0 +1,124 @@
+<!DOCTYPE html><html lang="ja"><head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/x-icon" href="/favicon.ico"><title>一ヶ月半くらいCSの基礎を学習してみた</title><meta name="title" content="一ヶ月半くらいCSの基礎を学習してみた"><meta name="description" content="10月から学生ニート状態でした。そのため11月くらいから興味のあったCSの基礎的な部分を勉強してみました。"><meta property="og:type" content="website"><meta property="og:url" content="https://togami2864.github.io/ja/my-cs-study/"><meta property="og:title" content="一ヶ月半くらいCSの基礎を学習してみた"><meta property="og:description" content="10月から学生ニート状態でした。そのため11月くらいから興味のあったCSの基礎的な部分を勉強してみました。"><meta property="og:image" content="https://togami2864.github.io/ogp/ja/my-cs-study.png"><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://togami2864.github.io/ja/my-cs-study/"><meta property="twitter:title" content="一ヶ月半くらいCSの基礎を学習してみた"><meta property="twitter:description" content="10月から学生ニート状態でした。そのため11月くらいから興味のあったCSの基礎的な部分を勉強してみました。"><meta property="twitter:image" content="https://togami2864.github.io/ogp/ja/my-cs-study.png"><link rel="preconnect" href="https://fonts.gstatic.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&amp;family=IBM+Plex+Sans:wght@400;700&amp;display=swap">
+    <link rel="stylesheet" href="/blog.css">
+  <link rel="stylesheet" href="../../../../assets/my-cs-study.2649402d.css">
+
+
+
+
+<script type="module" src="../../../../assets/my-cs-study.ce7cd352.js"></script>
+</head>
+
+  <body>
+    <header class="layout astro-RYYIPVX6">
+  <article class="astro-RYYIPVX6">
+    <h1 class="astro-RYYIPVX6">
+      <a href="/ja/" class="astro-RYYIPVX6">
+        <span class="astro-RYYIPVX6">togami2864</span>
+      </a>
+      <nav class="astro-RYYIPVX6">
+      <ul class="astro-RYYIPVX6">
+        <li class="astro-RYYIPVX6"><a href="/ja/" class="astro-RYYIPVX6">Home</a></li>
+        <li class="astro-RYYIPVX6"><a href="/ja/blog" class="astro-RYYIPVX6">Blog</a></li>
+        <astro-root uid="Z2wIK2I"><select><option value="en">🇺🇸</option><option selected="" value="ja">🇯🇵</option></select></astro-root>
+      </ul>
+      </nav>
+    </h1>
+  </article>
+</header>
+
+
+
+    
+<div class="layout astro-WRHIPJZM">
+  <article class="content astro-WRHIPJZM">
+    <div class="astro-WRHIPJZM">
+      <header class="astro-WRHIPJZM">
+        <img width="720" height="420" class="hero-image astro-WRHIPJZM" loading="lazy" src="/hero/hero_6.jpeg">
+        <p class="publish-date astro-WRHIPJZM">Sunday, Dec. 12 2021</p>
+        <h1 class="title astro-WRHIPJZM">一ヶ月半くらいCSの基礎を学習してみた</h1>
+        
+<div class="author astro-6UFXINQO">
+  <p class="astro-6UFXINQO"><a href="https://twitter.com/togami2864" class="astro-6UFXINQO">@togami2864</a></p>
+</div>
+
+
+
+        <astro-root uid="2w7Vm8"></astro-root>
+      </header>
+      <main class="astro-WRHIPJZM">
+        <p>10月から学生ニート状態でした。そのため11月くらいから興味のあったCSの基礎的な部分を勉強してみました。一ヶ月半経過したメモ。</p><h2 id="動機">動機</h2><ul>
+<li>開発ツール系のOSSで深いところに突っ込もうとすると、結構厳しさを感じていた。脳死でコードリーディングするのはつらたんなので一旦おやすみして<a href="https://www.sigbus.info/compilerbook">コンパイラブック</a>に取り組んでた。進めていて結局メモリ周りのことに興味をもった</li>
+<li>もうちょっとやっとけばよかったという先行研究が大量にあったため</li>
+</ul><h2 id="外観">外観</h2><p>まず<a href="https://gihyo.jp/book/2020/978-4-297-11781-8">キタミ式イラストIT塾基本情報技術者</a>を使いました。
+かなり分厚いですが関係のある部分だけだったら2時間ぐらいで一周できます。これでどんな分野があるかつかみました。
+その結果次の順序で勉強していくことにしました。</p><ol>
+<li>半導体</li>
+<li>組み合わせ回路</li>
+<li>論理演算</li>
+<li>順序回路</li>
+</ol><p>----↑ ここまでは筆者が大学で勉強している部分です-----</p><ol start="5">
+<li>CPU・メモリの外観</li>
+<li>機械語(x86)</li>
+<li>CPU</li>
+<li>コンパイラ</li>
+<li>OS</li>
+<li>DB</li>
+<li>ネットワーク</li>
+<li>セキュリティ</li>
+</ol><p>結論からいうと、<strong>脱線しまくったのでもちろんこの通りには進んでないです。</strong>
+以下順番に書いていきますが、結構行ったり来たりしてます。</p><h2 id="半導体--順序回路">半導体 ~ 順序回路</h2><p>ここは若干触れたことがあったこともあった &amp; あんまり深入りしすぎるときりがないのでさらーと進めました。<sup><a href="#user-content-fn-1" id="user-content-fnref-1" data-footnote-ref="" aria-describedby="footnote-label">1</a></sup>
+半導体、組み合わせ回路については</p><ul>
+<li>ざっくりとした半導体の歴史</li>
+<li>p型・n型半導体</li>
+<li>各FETとCMOSの仕組み、CMOSの消費電力について</li>
+<li>なぜNAND回路が実世界で主に使われているか</li>
+</ul><p>あたりがわかっとけば現状いいと判断しました。
+論理演算・順序回路に関してはカルノー図や状態遷移図を用いた論理設計を軽くおさらい程度です。
+ここはあまり時間をかけていません。</p><h2 id="cpuメモリの概観">CPU・メモリの概観</h2><p>メモリに関しては以前からちまちまやっていたコンパイラブックで触れていたのに
+加えて<a href="https://www.manning.com/books/rust-in-action">Rust in Action</a>の第6章が非常に面白くて良い教材でした。
+<a href="https://www.shoeisha.co.jp/book/detail/9784798173856">先日日本語版も出ました。</a></p><p>ポインタ・(Rustにおける)参照・生ポインタ・メモリアドレス・スマートポインタの話が盛り沢山です。Cコンパイラを作る際にポインタ型の実装がまったく理解できていなかったのですが、この本をやったおかげでちょっとだけ視界が晴れました。</p><p>上記以外では書籍を読むよりもCやRustで気になった部分を色々実験したり調べながら進めました。
+例えば<a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;gist=b0bbdca687ba14e290bbe24f5e8027c2">構造体それ自身とメンバの配置がメモリ上でどうなっているのか試してみたり</a>、Cのメモリ脆弱性に関する部分(バッファーオーバーフロー、ダブリングポインターなど)を調べたりしていました。<sup><a href="#user-content-fn-2" id="user-content-fnref-2" data-footnote-ref="" aria-describedby="footnote-label">2</a></sup></p><h2 id="機械語">機械語</h2><p>こちらも<a href="https://gihyo.jp/book/2020/978-4-297-11781-8">コンパイラブック</a>で基礎的な命令や規則はほとんど勉強しました。x86-64です。</p><h2 id="cpu">CPU</h2><p>前述の<a href="https://www.shoeisha.co.jp/book/detail/9784798173856">Rust in Action</a>の第５章でRustで簡単なCPUエミュレータを作りました。書籍をメモし忘れていたのですがCでもエミュレータを作りました。まだhdlには触れていません。じつはあまり深堀りできていのでどうにかするつもりでいます。パタヘネ本とか見たほうがいいのか🤔<sup><a href="#user-content-fn-3" id="user-content-fnref-3" data-footnote-ref="" aria-describedby="footnote-label">3</a></sup></p><h2 id="コンパイラ">コンパイラ</h2><p>コンパイブックで(以下略</p><p>ちなみに手作りCコンパイラくんはgdbデバックも虚しく謎のセグフォで積んでしまい先日廃車確定しました。</p><p>ここでかなり寄り道をしていて、</p><ul>
+<li>azuさんの<a href="https://dive-into-ast.netlify.app/">Dive into AST</a>をみながら結構あやふやにしていたASTの基本的な部分を学びました。</li>
+<li><a href="https://www.oreilly.co.jp/books/9784873118222/">Goで作るインタプリタ</a>をRustでつくりました。</li>
+<li><a href="https://github.com/rust-lang/rust-clippy">rust-clippy</a>でたまたま踏んだバグがissueに上がっていたのでコントリビュートしたりしてました。</li>
+<li>↑に付随してASTとHIRやMIRといった中間表現に関してすこしかじりました。<a href="https://rustc-dev-guide.rust-lang.org/about-this-guide.html">Guide to Rustc Development</a>や<a href="https://qiita.com/0yoyoyo/items/eba97a019d0e60324263">こちらの記事</a>を参考に進めました。(あんまり理解できてないですが😇)</li>
+</ul><p>といろいろやってました。</p><h2 id="os">OS</h2><p>12/10日時点でここまでいけませんでした…頑張って続けます。</p><h2 id="反省">反省</h2><p>CSの勉強というより言語処理の勉強になっていた。コンパイラ関連に比重が偏り過ぎている😇😇😇</p><h2 id="その他">その他</h2><ul>
+<li>めっちゃライプニッツとかシャノンについて調べてました。</li>
+<li><a href="https://docs.rs/nix/latest/nix/"><code data-astro-raw="">nix</code></a>クレートを使ってrustで自作のShellを作ろうとしてました。が、<code data-astro-raw="">nix</code>の情報が少なく全然進んでません。parserつくってpipeやredirectあたりは実装したいところ。</li>
+</ul><h2 id="終わりに">終わりに</h2><ul>
+<li>自分にしてはわりと続いた</li>
+<li><a href="https://gihyo.jp/book/2020/978-4-297-11781-8">コンパイラブック</a>はいいぞ！</li>
+</ul><section data-footnotes="" class="footnotes"><h2 id="footnote-label" class="sr-only">Footnotes</h2>
+<ol>
+<li id="user-content-fn-1">
+<p>物理層に近づくほど量子力学や統計力学の知識が必要になって重い。未だに雰囲気しかわからない… <a href="#user-content-fnref-1" data-footnote-backref="" class="data-footnote-backref" aria-label="Back to content">↩</a></p>
+</li>
+<li id="user-content-fn-2">
+<p>脆弱性に関して<a href="https://www.oreilly.co.jp/books/9784873115146/">Hacking: 美しき策謀 ―脆弱性攻撃の理論と実際</a>という面白そうな本が積読状態だ。 <a href="#user-content-fnref-2" data-footnote-backref="" class="data-footnote-backref" aria-label="Back to content">↩</a></p>
+</li>
+<li id="user-content-fn-3">
+<p>最近までずっと<code data-astro-raw="">ペタハネ</code>だと勘違いしていた。<code data-astro-raw="">パタヘネ</code>だった。 <a href="#user-content-fnref-3" data-footnote-backref="" class="data-footnote-backref" aria-label="Back to content">↩</a></p>
+</li>
+</ol>
+</section>
+      </main>
+    </div>
+  </article>
+</div>
+
+
+
+    
+<div class="to_home astro-3NJFVEK2">
+    <a href="/ja/blog" class="astro-3NJFVEK2">Back to Home</a>
+</div>
+
+
+    <footer id="footer" class="astro-T7BYFHTY">
+<p class="astro-T7BYFHTY">This site is launched by <a href="https://astro.build/" class="astro-T7BYFHTY">Astro</a> &amp; hosted on <a href="https://pages.github.com/" class="astro-T7BYFHTY">GiHub Pages</a></p>
+<small class="astro-T7BYFHTY">© togami2864 2021</small>
+</footer>
+
+
+  </body></html>
