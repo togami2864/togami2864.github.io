@@ -8,14 +8,5 @@ export default {
   },
   vite: {
     plugins: [],
-    resolve: {
-      alias: {
-        '@components/*': path.join(
-          // @ts-ignore
-          path.dirname(new URL(import.meta.url).pathname),
-          './src/components'
-        ),
-      },
-    },
   },
 };
