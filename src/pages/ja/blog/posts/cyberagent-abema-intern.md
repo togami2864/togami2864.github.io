@@ -37,7 +37,7 @@ abema-webではテストライブラリとして`ava`を、テスト実行時の
 文字だと少しわかりにくいため[非常に簡素化したテストライブラリを用意しました]()。手元にクローンして遊んでみてください。
 実際にコードを見ていきましょう。シンプルなテストケースとして次のようなものをテストするとします。
 
-```javascript
+```js
 // __test__/index.test.js
 
 it("sample test", () => {
@@ -53,7 +53,7 @@ it("sample test", () => {
 `toBe` はシンプルに `received` と `expected` が一致していれば `true` をそうでなければ `Error` をthrowします。
 また、`it` は第一引数にタイトルを第二引数に関数を受け取る関数です。それらを適当な配列へpushします。
 
-```javascript
+```js
 // index.js
 
 const tests = []
