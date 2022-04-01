@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charSet="utf-8"/><meta name="viewport" content="width=device-width"/><link rel="icon" type="image/x-icon" href="/favicon.ico"/><title>jsテストライブラリの内部実装調査と実行速度の改善@abema-web</title><meta name="title" content="jsテストライブラリの内部実装調査と実行速度の改善@abema-web"/><meta name="description" content="2022年2月にabemaのwebチームでjsテストライブラリの内部実装調査とライブラリの移行検証、実行速度の改善を行いました。"/><meta property="og:type" content="website"/><meta property="og:url" content="https://togami2864.github.io/ja/cyberagent-abema-intern/"/><meta property="og:title" content="jsテストライブラリの内部実装調査と実行速度の改善@abema-web"/><meta property="og:description" content="2022年2月にabemaのwebチームでjsテストライブラリの内部実装調査とライブラリの移行検証、実行速度の改善を行いました。"/><meta property="og:image" content="https://togami2864.github.io/ogp/ja/cyberagent-abema-intern.png"/><meta property="twitter:card" content="summary_large_image"/><meta property="twitter:url" content="https://togami2864.github.io/ja/cyberagent-abema-intern/"/><meta property="twitter:title" content="jsテストライブラリの内部実装調査と実行速度の改善@abema-web"/><meta property="twitter:description" content="2022年2月にabemaのwebチームでjsテストライブラリの内部実装調査とライブラリの移行検証、実行速度の改善を行いました。"/><meta property="twitter:image" content="https://togami2864.github.io/ogp/ja/cyberagent-abema-intern.png"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&amp;family=IBM+Plex+Sans:wght@400;700&amp;display=swap"/>
+    <link rel="stylesheet" href="/blog.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prism-themes@1.9.0/themes/prism-lucario.css">
+  <link rel="stylesheet" href="/assets/BlogPost.7d025e17.css"></link>
+<link rel="stylesheet" href="/assets/Footer.6a23779a.css"></link><style astro-style="true">astro-root, astro-fragment { display: contents; }</style><script type="module" data-astro-component-hydration astro-script="/ja/blog/posts/cyberagent-abema-intern/script-0">import setup from '../../../../load.b893f8bb.js';
+import 'data:text/javascript;charset=utf-8,//[no before-hydration script]';
+setup("6e2C8", {name:"LangSelector",value: true}, async () => {
+  const [{ LangSelector: Component }, { default: hydrate }] = await Promise.all([import("../../../../LangSelector.a01a59b1.js"), import("../../../../client.69c3a422.js")]);
+  return (el, children) => hydrate(el)(Component, {"initLang":"ja","translation":""}, children);
+
+});
+</script>
+<script type="module" data-astro-component-hydration astro-script="/ja/blog/posts/cyberagent-abema-intern/script-1">import setup from '../../../../only.7dda3e36.js';
+import 'data:text/javascript;charset=utf-8,//[no before-hydration script]';
+setup("Z2hccHt", {name:"Lang",value: true}, async () => {
+  const [{ Lang: Component }, { default: hydrate }] = await Promise.all([import("../../../../Lang.8e7b5dc4.js"), import("../../../../client.69c3a422.js")]);
+  return (el, children) => hydrate(el)(Component, {"isJapanese":true,"isEnAvailable":false,"isJaAvailable":true,"filename":"cyberagent-abema-intern","class":"astro-WRHIPJZM"}, children);
+
+});
+</script>
+</head>
+
+  <body>
+    <header class="layout astro-RYYIPVX6">
+  <article class="astro-RYYIPVX6">
+    <h1 class="astro-RYYIPVX6">
+      <a href="/ja/" class="astro-RYYIPVX6">
+        <span class="astro-RYYIPVX6">togami2864</span>
+      </a>
+      <nav class="astro-RYYIPVX6">
+      <ul class="astro-RYYIPVX6">
+        <li class="astro-RYYIPVX6"><a href="/ja/" class="astro-RYYIPVX6">Home</a></li>
+        <li class="astro-RYYIPVX6"><a href="/ja/blog" class="astro-RYYIPVX6">Blog</a></li>
+        <astro-root uid="6e2C8"><select><option value="en">🇺🇸</option><option selected="" value="ja">🇯🇵</option></select></astro-root>
+      </ul>
+      </nav>
+    </h1>
+  </article>
+</header>
+
+
+
+    <div class="layout astro-WRHIPJZM">
+  <article class="content astro-WRHIPJZM">
+    <div class="astro-WRHIPJZM">
+      <header class="astro-WRHIPJZM">
+        <img width="720" height="420" class="hero-image astro-WRHIPJZM" loading="lazy" src="/hero/hero_2.jpeg">
+        <p class="publish-date astro-WRHIPJZM">Tuesday, Mar. 29 2022</p>
+        <h1 class="title astro-WRHIPJZM">jsテストライブラリの内部実装調査と実行速度の改善@abema-web</h1>
+        <div class="author astro-6UFXINQO">
+  <p class="astro-6UFXINQO"><a href="https://twitter.com/togami2864" class="astro-6UFXINQO">@togami2864</a></p>
+</div>
+
+
+
+        <astro-root uid="Z2hccHt"></astro-root>
+      </header>
+      <main class="astro-WRHIPJZM">
+        <p>2022年2月にabemaのwebチームでjsテストライブラリの内部実装調査とライブラリの移行検証、実行速度の改善を行いました。メンターの<a href="https://twitter.com/nodaguti">@nodaguchi</a>さんを始めabema-webチームの皆様ありがとうございました。</p><p>早速本題に入りますが、タイトルの通り次のような業務を行いました。</p><ul>
+<li>jsテストライブラリの内部実装調査</li>
+<li>abema-webでのjest移行検証</li>
+<li>ユニットテストの実行速度改善</li>
+</ul><p>最終的にはローカルにおける実行速度を <strong>約80%</strong> 高速化しました。</p><h3 id="モチベーション">モチベーション</h3><h4 id="1-実行に時間がかかる">1: 実行に時間がかかる</h4><p>abema-webではテストライブラリとして <code>ava</code> を、テスト実行時のトランスパイラに  <code>babel</code> と各種 <code>react</code> や <code>typescript</code> のプラグイン(<code>preset-react</code> 、<code>preset-typescript</code> など)を使用しており、<strong>約1400件</strong> のユニットテストが存在しています。そしてローカルですべてのユニットテストを実行すると <strong>約10分</strong> かかり、実行するのが億劫な状態でした。</p><h4 id="2-エコシステム面で不安">2: エコシステム面で不安</h4><p>esbuildやswcといったコンパイラを用いた <code>jest</code> の実行時間の高速化や <code>vitest</code>の登場など新たなコンパイラを用いたテスト環境が取り上げられるケースが多くなりました。
+これらのエコシステムの充実度合いや将来性を考えると不安が残るため、移行を検証してみてみました。</p><h3 id="ライブラリの内部調査">ライブラリの内部調査</h3><p>実行速度のボトルネックとなっている部分を知るために <code>ava</code> のコードを実際にコードリーディングを行いました。その結果、テストの実行の流れを勝手に3つのフェーズに分けました。</p><ol>
+<li><strong>glob</strong>: テストファイルの取得</li>
+<li><strong>setup</strong>: (globの終了 ~ runの実行前)
+<ul>
+<li>依存のresolve</li>
+<li>テストファイルのトランスパイル</li>
+<li>describeやit、chain、hookの解析</li>
+<li>プロセスやスレッドのfork</li>
+</ul>
+</li>
+<li><strong>assertion</strong>: アサーションの実行</li>
+</ol><p>文字だと少しわかりにくいため<a href="https://github.com/togami2864/toy-js-test-framework">非常に簡素化したテストライブラリを用意しました</a>。手元にクローンして遊んでみてください。</p><p>実際にコードを見ていきましょう。シンプルなテストケースとして次のようなものをテストするとします。</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #8B949E">// __test__/index.test.js</span></span>
+<span class="line"><span style="color: #D2A8FF">it</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">&quot;sample test&quot;</span><span style="color: #C9D1D9">, () </span><span style="color: #FF7B72">=&gt;</span><span style="color: #C9D1D9"> {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #D2A8FF">expect</span><span style="color: #C9D1D9">(</span><span style="color: #79C0FF">true</span><span style="color: #C9D1D9">).</span><span style="color: #D2A8FF">toBe</span><span style="color: #C9D1D9">(</span><span style="color: #79C0FF">true</span><span style="color: #C9D1D9">);</span></span>
+<span class="line"><span style="color: #C9D1D9">});</span></span></code></pre><p>テストライブラリ側で用意する関数は</p><ul>
+<li>it</li>
+<li>expect</li>
+</ul><p>です。
+<code>toBe</code> はシンプルに <code>received</code> と <code>expected</code> が一致していれば <code>true</code> を返し、そうでなければ <code>Error</code> をthrowします。
+また、<code>it</code> は第一引数にタイトルを第二引数に関数を受け取る関数です。それらを適当な配列へpushします。</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #8B949E">// index.js</span></span>
+<span class="line"><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">tests</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> []</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #8B949E">//matcherの定義</span></span>
+<span class="line"><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">expect</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> (</span><span style="color: #FFA657">received</span><span style="color: #C9D1D9">) </span><span style="color: #FF7B72">=&gt;</span><span style="color: #C9D1D9"> ({</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #D2A8FF">toBe</span><span style="color: #C9D1D9">: (</span><span style="color: #FFA657">expected</span><span style="color: #C9D1D9">) </span><span style="color: #FF7B72">=&gt;</span><span style="color: #C9D1D9"> {</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">if</span><span style="color: #C9D1D9"> (received </span><span style="color: #FF7B72">!==</span><span style="color: #C9D1D9"> expected) {</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #FF7B72">throw</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">new</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">Error</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">`Expected ${</span><span style="color: #C9D1D9">expected</span><span style="color: #A5D6FF">} but received ${</span><span style="color: #C9D1D9">received</span><span style="color: #A5D6FF">}.`</span><span style="color: #C9D1D9">);</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">true</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"><span style="color: #C9D1D9">  },</span></span>
+<span class="line"><span style="color: #C9D1D9">});</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #8B949E">// test関数の定義(testsは適当な配列)</span></span>
+<span class="line"><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">it</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> (</span><span style="color: #FFA657">title</span><span style="color: #C9D1D9">, </span><span style="color: #FFA657">fn</span><span style="color: #C9D1D9">) </span><span style="color: #FF7B72">=&gt;</span><span style="color: #C9D1D9"> tests.</span><span style="color: #D2A8FF">push</span><span style="color: #C9D1D9">([title, fn]);</span></span></code></pre><p>次にファイルの取得です。本来ならば適当な <code>glob</code> ができるライブラリを用いてテストファイルのパスの配列を取得します。</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #8B949E">// 1. glob(本来であればglobを使う)</span></span>
+<span class="line"><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">testFilePath</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> [</span><span style="color: #A5D6FF">&quot;__test__/index.test.js&quot;</span><span style="color: #C9D1D9">];</span></span></code></pre><p>この取得した <code>testFilePath</code> を <code>for</code> で回して評価していきます。</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">for</span><span style="color: #C9D1D9"> (file </span><span style="color: #FF7B72">of</span><span style="color: #C9D1D9"> testFilePath) {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">code</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> fs.</span><span style="color: #D2A8FF">readFileSync</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">`${</span><span style="color: #C9D1D9">root</span><span style="color: #A5D6FF">}/${</span><span style="color: #C9D1D9">file</span><span style="color: #A5D6FF">}`</span><span style="color: #C9D1D9">, </span><span style="color: #A5D6FF">&quot;utf-8&quot;</span><span style="color: #C9D1D9">);</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #79C0FF">eval</span><span style="color: #C9D1D9">(code);</span></span></code></pre><p>やってることは次のコードと同じになります。<code>it</code>や <code>expect</code> は前に宣言していますね。</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #8B949E">// index.js</span></span>
+<span class="line"><span style="color: #FF7B72">for</span><span style="color: #C9D1D9"> (file </span><span style="color: #FF7B72">of</span><span style="color: #C9D1D9"> testFilePath) {</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">const</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">code</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> fs.</span><span style="color: #D2A8FF">readFileSync</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">`${</span><span style="color: #C9D1D9">root</span><span style="color: #A5D6FF">}/${</span><span style="color: #C9D1D9">file</span><span style="color: #A5D6FF">}`</span><span style="color: #C9D1D9">, </span><span style="color: #A5D6FF">&quot;utf-8&quot;</span><span style="color: #C9D1D9">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #8B949E">// ↓ evalの部分。引数の `code` の内容がそのまま実行される。</span></span>
+<span class="line"><span style="color: #C9D1D9">  </span><span style="color: #D2A8FF">it</span><span style="color: #C9D1D9">(</span><span style="color: #A5D6FF">&quot;sample test&quot;</span><span style="color: #C9D1D9">, () </span><span style="color: #FF7B72">=&gt;</span><span style="color: #C9D1D9"> {</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #D2A8FF">expect</span><span style="color: #C9D1D9">(</span><span style="color: #79C0FF">true</span><span style="color: #C9D1D9">).</span><span style="color: #D2A8FF">toBe</span><span style="color: #C9D1D9">(</span><span style="color: #79C0FF">true</span><span style="color: #C9D1D9">);</span></span>
+<span class="line"><span style="color: #C9D1D9">  });</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #FF7B72">...</span><span style="color: #C9D1D9">..</span></span></code></pre><p>すると関数 <code>it</code> が実行され、配列 <code>tests</code>にpushされていきます。</p><p>最後にアサーションを行っていきます。 <code>for</code>で <code>tests</code> を回して <code>title</code> と <code>fn</code>を取り出します。
+<code>fn</code> は先程のテストファイルのアサーション <code>expect(true).toBe(true)</code> に当たります。</p><p>これを <code>try</code> 内で実行します。もしも関数 <code>expect</code> でエラーが発生すれば <code>catch</code> 節へ行きます。</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #FF7B72">try</span><span style="color: #C9D1D9"> {</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// 3. assertion実行(今回の場合`expect(true).toBe(true)`)</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #D2A8FF">fn</span><span style="color: #C9D1D9">();</span></span>
+<span class="line"><span style="color: #C9D1D9">      result.success </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">true</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"><span style="color: #C9D1D9">    } </span><span style="color: #FF7B72">catch</span><span style="color: #C9D1D9"> (e) {</span></span>
+<span class="line"><span style="color: #C9D1D9">      </span><span style="color: #8B949E">// もしもfn()でエラーが起こったらcatch節へ</span></span>
+<span class="line"><span style="color: #C9D1D9">      result.error </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> e;</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span></code></pre><p>これが大まかなテストライブラリの実行の流れになります。
+<a href="https://github.com/togami2864/toy-js-test-lib-esm">もう少し実際のテストライブラリに近づけたものも用意しました。</a>雰囲気はつかめると思うので、ぜひ遊んでみてください。(解説はいつか書く)</p><h3 id="仮説">仮説</h3><p>テストライブラリの仕組みを知ることで</p><ul>
+<li>思いのほかjsのコード自体を評価しなければならない部分が多い。</li>
+<li>ライブラリの外からパフォーマンス改善のために手を加えられる部分は少ない</li>
+</ul><p>ということがわかったと思います。</p><p>jsのコード自体を評価しなければならない部分を早くするというのは <code>Node.js</code> の実行スピードを上げることとほぼ同義なのであまり現実的ではありません。また、テストの数が増えれば増えるほどこの部分の実行時間がかさむのではないかと考えました。</p><p>そのため身もふたもないのですが、<strong>一つ一つの実行スピードを縮めるのはあまり現実的で無いため、如何にコンピュータに効率よくタスクをさばかせられるか(結局コア数指定増やしてparallel run)が改善の鍵だと考えました。</strong></p><p>これを踏まえて、</p><ul>
+<li>トランスフォーマーを変える</li>
+<li>論理コア数を使える最大まで使ってparallelにテスト実行</li>
+</ul><p>を行うことでabema-webのテストがどこまで早くできるか、移行とセットで検証をしました。</p><p>また、参考程度ではありますが、一つテストタスクあたりの各フェーズにかかる時間を測定して大小比較を試みました。もちろんこれはライブラリ間で単純比較できるものではありませんし、測定の都合上正確な数字ではありません。</p><p><img src="/images/cyberagent-abema-intern/chart-phase.png" alt="chart-phase"></p><p>当たり前ではありますが処理盛りだくさんの <code>setup</code> が <code>assertion</code> の約6倍程度かかっていました。
+また <code>glob</code> の全体に対する割合は小さいことがわかります。</p><h3 id="jestへの移行検証">jestへの移行検証</h3><p>調査を踏まえて、abema-webのテスト環境を <code>jest</code> へ移行をはじめました。<sup><a href="#user-content-fn-1" id="user-content-fnref-1" data-footnote-ref aria-describedby="footnote-label">1</a></sup>
+大まかな流れとして</p><ol>
+<li><a href="https://github.com/skovhus/jest-codemods">jest-codemods</a>による一括変換</li>
+<li>残りを変換
+<ul>
+<li>jest-codemodsが非対応なところ</li>
+<li>avaのコンテクストに依存して独自に実装していたところ</li>
+</ul>
+</li>
+</ol><p>jest-codemodsは <code>ava</code> や <code>jasmine</code> から <code>jest</code> に移行するためのマイグレーションツールです。このツールで最初に一括でコードを変換しました。</p><p>次に残りの部分ですが、<code>jest-codemods</code> が未対応なものとして次のものが挙げられます。</p><ul>
+<li>t.like</li>
+<li>t.pass / t.fail</li>
+<li>t.context など</li>
+</ul><p>これらの部分と独自に作っていた <code>assertProvider</code> や <code>Mock</code> をVSCodeの置換や<a href="https://github.com/facebook/jscodeshift">js-codeshift</a>のtransformerを自作して変換を行っていきました。</p><h3 id="トランスパイラについて">トランスパイラについて</h3><p>再掲ですが abema-webのテスト環境では <code>babel</code> と各種 <code>react</code> や <code>typescript</code> のプラグイン(<code>preset-react</code> 、<code>preset-typescript</code> など)を使用しています。</p><p><code>preset-typescript</code> は型チェックは行っていないので変更しても問題ないと判断しました。今回は次の2つのツールを検討しました。</p><h4 id="esbuild-jest"><a href="https://github.com/aelbore/esbuild-jest">esbuild-jest</a></h4><p>abema-webではプロダクションビルドで <code>esbuild</code> を使っているため統一できると考え、最初に検討しました。しかし、</p><ul>
+<li>jestの最新バージョン <code>v27</code> に対応していない</li>
+<li>メンテナンスがあまりされていない</li>
+</ul><p>ことから今回は試しませんでした。</p><h4 id="swcjest"><a href="https://github.com/swc-project/jest">@swc/jest</a></h4><p>swc-project公式でメンテナンスされており、jestのv27でも問題なかったため今回はこちらを採用しました。また、思わぬ副産物として<strong>今まで使っていたプラグインがなくてもすべて正常に動作したため、configが非常に簡潔になりました。</strong></p><h2 id="速度の計測">速度の計測</h2><p>ローカル環境では</p><ul>
+<li>AVA + Babel(コア3)</li>
+<li>AVA + Babel(コア数15)</li>
+<li>jest + Babel(コア数15)</li>
+<li>jest + swc(コア数15)
+を比較しました。</li>
+</ul><p><code>MacBook Pro 2019</code> 上であり、論理コア数は16でした。<sup><a href="#user-content-fn-2" id="user-content-fnref-2" data-footnote-ref aria-describedby="footnote-label">2</a></sup>
+そのため <code>jest</code> の実行コマンドオプションに <code>--maxWorkers=15</code>を指定して実行しました。</p><p>CircleCi上では<code>Docker</code> の <code>Executer</code> は <code>medium</code> でコア数は2です。同様に <code>jest</code> の実行コマンドオプションに <code>--maxWorkers=1</code>を指定した上で、CircleCIのparallelismで分割指定し、</p><ul>
+<li>AVA + Babel</li>
+<li>jest + Babel</li>
+<li>jest + swc</li>
+</ul><p>を比較しました。</p><p>すべて実行は5回ずつ行ってその平均を取りました。</p><h3 id="速度の比較ローカル">速度の比較(ローカル)</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>AVA+Babel(3)</th>
+<th>AVA+Babel(15)</th>
+<th>jest+Babel</th>
+<th>jest+swc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>10m 13s</td>
+<td>5m 54s</td>
+<td>2m 6s</td>
+<td>1m 52s</td>
+</tr>
+<tr>
+<td>2</td>
+<td>10m 14s</td>
+<td>6m 3s</td>
+<td>2m 4s</td>
+<td>1m 53s</td>
+</tr>
+<tr>
+<td>3</td>
+<td>10m 12s</td>
+<td>5m 51s</td>
+<td>2m 5s</td>
+<td>1m 52s</td>
+</tr>
+<tr>
+<td>4</td>
+<td>10m 13s</td>
+<td>5m 50s</td>
+<td>2m 4s</td>
+<td>1m 51s</td>
+</tr>
+<tr>
+<td>5</td>
+<td>10m 13s</td>
+<td>5m 49s</td>
+<td>2m 5s</td>
+<td>1m 51 s</td>
+</tr>
+<tr>
+<td>平均</td>
+<td>10m 13s</td>
+<td>5m 53s</td>
+<td>2m 5s</td>
+<td>1m 52s</td>
+</tr>
+</tbody>
+</table><p><img src="/images/cyberagent-abema-intern/chart-local.png" alt="chart-local"></p><ul>
+<li>ava + babel(コア３) -> jest + swc 構成への移行で <strong>約80%</strong> の短縮</li>
+<li>ava + babel(コア15) -> jest + swc 構成への移行で <strong>約70%</strong> の短縮</li>
+</ul><p>をすることができました。
+概ね仮説通り実行コア数を増やすことは効果的であり、大幅な実行時間の改善を行うことができました。また、トランスパイラによる差異もせいぜい10秒未満であり影響は小さかったと言えました。</p><h3 id="速度の比較circleci">速度の比較(CircleCI)</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>AVA+Babel</th>
+<th>jest+Babel</th>
+<th>jest+swc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>3m 36s</td>
+<td>3m 38s</td>
+<td>3m 10s</td>
+</tr>
+<tr>
+<td>2</td>
+<td>3m 27s</td>
+<td>3m 33s</td>
+<td>3m 11s</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3m 20s</td>
+<td>3m 20s</td>
+<td>3m 6s</td>
+</tr>
+<tr>
+<td>4</td>
+<td>3m 13s</td>
+<td>3m 11s</td>
+<td>2m 47s</td>
+</tr>
+<tr>
+<td>5</td>
+<td>3m 44s</td>
+<td>3m 14s</td>
+<td>2m 53s</td>
+</tr>
+<tr>
+<td>平均</td>
+<td>3m 28s</td>
+<td>3m 23s</td>
+<td>3m 1s</td>
+</tr>
+</tbody>
+</table><p><img src="/images/cyberagent-abema-intern/chart-ci.png" alt="chart-ci"></p><p>こちらはあまり劇的な改善をすることができませんでした。ローカルではコアを富豪的に使えたこともあってそれに比べると、リソースが厳しく、あまり全体的に大きな差異が出ませんでした。</p><p>一方で<strong>仮説とは反対にトランスパイラによる違いがはっきりと現れており、30秒 ~ ほど早くなりました。</strong> 今回測定した中では2分台が出たのは <code>swc</code> を使ったパターンのみでした。</p><p>また、別の問題として、CircleCIのparallelismの挙動に偏りがあり、それを解消できなかったことが挙げられます。コンテナ1は2分40秒ほどで終わっているのにコンテナ2は3分40秒かかるみたいな現象が起きていました。</p><h3 id="残った課題">残った課題</h3><p>先程言及したとおり、CircleCIのparallelismの挙動となぜCircleCI環境下では顕著に早かったかまでは深く探求することができませんでした。<sup><a href="#user-content-fn-3" id="user-content-fnref-3" data-footnote-ref aria-describedby="footnote-label">3</a></sup>また、今回の測定ではCPU負荷やテスト環境のisolationに関して言及できていなかったため、まだまだ調査が必要だと感じています。</p><h3 id="最後に">最後に</h3><p>まだまだ粗のある調査でしたが、とてもおもしろかったです。改めて、abema-webチームの皆様、ありがとうございました！！</p><h3 id="おまけ-vitestを使っておけば早くなるのか">おまけ: vitestを使っておけば早くなるのか</h3><p><strong>watchモードではなく通常実行(CIとかで単発で実行するとき)での話です。</strong></p><ul>
+<li>バージョン
+<ul>
+<li>v0.8.0</li>
+</ul>
+</li>
+</ul><p>現状だとケースバイケースだと個人的に考えています。まずは理屈っぽい話から。
+<code>vitest</code> のアイデアは単純明快でリゾルバーとして <code>vite</code> を使おうというものです。
+核は<a href="https://github.com/vitest-dev/vitest/tree/main/packages/vite-node">vite-node</a>というパッケージです。これはREADMEの通り <code>Vite as Node runtime</code> であり、Browserの代わりにRunnerがclientに当たります。</p><p><code>vitest</code> は</p><ul>
+<li>Viteで諸々transform -> vmのコンテクスト内でテストファイルを実行 -> vitest側の処理</li>
+</ul><p>というのを繰り返して動作していることになります。</p><p>ここで、テストの流れを再度復習しておくと</p><ol>
+<li><strong>glob</strong>: テストファイルの取得</li>
+<li><strong>setup</strong>: (globの終了 ~ runの実行前)
+<ul>
+<li>依存のresolve</li>
+<li>テストファイルのトランスパイル</li>
+<li>describeやit、chain、hookの解析</li>
+<li>プロセスやスレッドのfork</li>
+</ul>
+</li>
+<li><strong>assertion</strong>: アサーションの実行</li>
+</ol><p>でした。<code>vite</code> を使うことによって高速化できそうな部分は</p><ul>
+<li>依存のresolve</li>
+<li>テストファイルのトランスパイル</li>
+</ul><p>です。
+<code>vite</code> を使ったからと言ってjs自体の実行速度が早くなるわけではありません。そのため、assertionやテストファイルの解析はできないため、この２つです。</p><p>また、トランスパイルに関しては <code>jest</code> でもtransformerを変えれば同じことができそうです。
+<strong>となると依存のresolveの高速化により時間の短縮は期待できそうです。</strong></p><p>裏を返すと<strong>そこまで依存のresolveがネックになっていないテストでは <code>jest</code> で回したときとあんまり変わらない!みたいなことは十分起こりうると考えています。</strong>(現にちょこちょこissueやdiscordで見かける)</p><p>現状babel -> esbuild/swcでビルド時間が○○十倍になりました！みたいな衝撃はないと思っていて、個人的には <strong><code>jest</code> での最速編成に当たるものを no config で作れる + <code>typescript</code> や<code>esm</code> を気にしなくていい</strong> みたいな感覚でいます。(言うまでもなく<strong>watchでの差分実行は爆速です。</strong>)</p><h4 id="vitest-がパフォーマンスに関して現状ぶち当たってる課題"><code>vitest</code> がパフォーマンスに関して現状ぶち当たってる課題</h4><ul>
+<li>workerの挙動</li>
+</ul><p>あまり安定していないケースがあるようです。(もちろんあまり影響していないケースもある)
+<code>vitest</code> は<a href="https://vitest.dev/config/#isolate">デフォルトでisolateが <code>true</code> になっています</a>。このisolateは単にparallelに実行するときの <code>worker</code> を都度生成し直すことでenv pollutionを防ぎます。(<a href="https://github.com/tinylibs/tinypool/pull/4">実装はvitestではなくtinypoolというライブラリ</a>)</p><p>しかし、これが原因でやたら実行が遅くなるケースが確認されており、isolateを切ると早くなります。(<a href="https://github.com/EvHaus/jest-vs-jasmine">jest vs jasmine</a>)おそらくworkerの生成や消去の乱発をし過ぎなんじゃないかなーみたいな話が出ています。</p><p>また、別の話でprofilerで解析したところ一部workerが無意味にアイドル状態になっている期間があり、あまり効率よく実行できていないケースがあるようです。</p><ul>
+<li>v0.6.0 ?</li>
+</ul><p>これは原因もわかっていないのですが、<code>v0.6.0</code> を境に謎に若干遅くなっている現象が起きています。
+ちょくちょく <code>vitest</code> を試す記事が出ていますが、バージョン <code>0.6.0</code> 以前のものであれば、最新版で再度実行すると結果が変わるかもしれません。</p><section data-footnotes class="footnotes"><h2 id="footnote-label" class="sr-only">Footnotes</h2>
+<ol>
+<li id="user-content-fn-1">
+<p>他に候補もあったのですが時間の都合で試せませんでした。 <a href="#user-content-fnref-1" data-footnote-backref class="data-footnote-backref" aria-label="Back to content">↩</a></p>
+</li>
+<li id="user-content-fn-2">
+<p>PCをとっくの昔に返却してしまいこれ以上わからない。。 <a href="#user-content-fnref-2" data-footnote-backref class="data-footnote-backref" aria-label="Back to content">↩</a></p>
+</li>
+<li id="user-content-fn-3">
+<p>swc云々というよりもローカルの方では parallel runのオーバヘッド > swcが短縮した時間になってしまいこのような結果になった可能性も考えられる。 <a href="#user-content-fnref-3" data-footnote-backref class="data-footnote-backref" aria-label="Back to content">↩</a></p>
+</li>
+</ol>
+</section>
+      </main>
+    </div>
+  </article>
+</div>
+
+
+
+    <div class="to_home astro-3NJFVEK2">
+    <a href="/ja/blog" class="astro-3NJFVEK2">Back to Home</a>
+</div>
+
+
+    <footer id="footer" class="astro-T7BYFHTY">
+<p class="astro-T7BYFHTY">This site is launched by <a href="https://astro.build/" class="astro-T7BYFHTY">Astro</a> &amp; hosted on <a href="https://pages.github.com/" class="astro-T7BYFHTY">GiHub Pages</a></p>
+<small class="astro-T7BYFHTY">© togami2864 2021</small>
+</footer>
+
+
+  </body></html>
