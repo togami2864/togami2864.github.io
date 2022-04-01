@@ -1,7 +1,7 @@
 ---
 title: 'jsテストライブラリの内部実装調査と実行速度の改善@abema-web'
 description: "2022年2月にabemaのwebチームでjsテストライブラリの内部実装調査とライブラリの移行検証、実行速度の改善を行いました。"
-publishDate: 'Tuesday, Mar. 29 2022'
+publishDate: 'Tuesday, Apr. 1 2022'
 author: '@togami2864'
 layout: '../../../../layouts/BlogPost.astro'
 lang: 'ja'
