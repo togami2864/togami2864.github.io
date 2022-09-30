@@ -1,0 +1,44 @@
+env:
+  githubEmail: tuabobo123@gmail.com
+  deployToRepo: togami2864.github.io
+
+name: Github Pages Astro CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16.8.0
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: |
+          npm run build
+          touch ./dist/.nojekyll
+
+      - name: Push to pages repo
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: 'dist'
+          destination-github-username: ${{ github.actor }}
+          destination-repository-name: ${{ env.deployToRepo }}
+          user-email: ${{ env.githubEmail }}
+          commit-message: Deploy ORIGIN_COMMIT
+          target-branch: gh-pages

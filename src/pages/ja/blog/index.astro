@@ -1,0 +1,36 @@
+---
+import Base from '../../../layouts/Base.astro';
+import BlogPostPreview from '@components/BlogPostPreview.astro';
+
+
+interface MarkdownFrontmatter {
+  publishDate: number;
+}
+
+const title = 'togami2864';
+const description = 'Writing about tech & my daily life';
+let permalink = 'https://togami2864.github.io/ja/blog/';
+
+let allPosts = Astro.fetchContent<MarkdownFrontmatter>('./posts/*.md');
+allPosts = allPosts.sort(
+  (a, b) =>
+    new Date(b.publishDate).valueOf() - new Date(a.publishDate).valueOf()
+);
+---
+<Base title={title} description={description} permalink={permalink} lang='ja'>
+  <section class="intro">
+    <h1 class="latest">👨‍💻記事一覧</h1>
+    <a href="/blog">switch to ENG🇺🇸 Version</a>
+  </section>
+  <section>
+    {allPosts.map((p)=> (
+        <BlogPostPreview post={p} />
+    ))}
+  </section>
+</Base>
+
+<style>
+.intro { padding-bottom: 1rem; border-bottom: 4px solid var(--theme-divider); }
+      .intro > * { margin: 0; } .latest {font-size: 2.5rem; font-weight: 700; }div.center{ text-align: center;}
+      p{font-size: 24px;}
+</style>
