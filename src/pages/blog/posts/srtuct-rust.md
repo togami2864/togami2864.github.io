@@ -121,7 +121,7 @@ total memory size: 12
 ```
 The order is a -> b -> c. It's the same as the C example, at the beginning of this article. And the total memory size is apparently bigger than the case without `#[repr(c)]`.
 
-## What I Learned
+## Conclusion
 - Rust doesn't have any specific memory layout of the struct
 - Rust compiler automatically optimizes the memory layout of the struct to minify the total memory size as much as possible
 - By adding attribute, uses can specify the memory layout
