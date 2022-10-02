@@ -51,5 +51,5 @@ const startTime = performance.now();
   await genArticleOGP(enArticles);
   await genArticleOGP(jaArticles);
   const endTime = performance.now();
-  console.log(endTime - startTime);
+  console.log('time:', endTime - startTime);
 })();
