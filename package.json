@@ -9,9 +9,11 @@
     "build": "astro build",
     "preview": "astro preview",
     "format": "prettier -w",
-    "gen:ogp": "npx ts-node ./scripts/genOgp.ts"
+    "gen:ogp": "npx ts-node ./scripts/genOgp.ts",
+    "e2e:all": "playwright test"
   },
   "devDependencies": {
+    "@playwright/test": "^1.27.0",
     "prettier": "^2.4.1"
   },
   "dependencies": {
