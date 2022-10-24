@@ -1,7 +1,8 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
+import mdx from '@astrojs/mdx';
 
 export default defineConfig({
-  integrations: [react()],
-  base: 'https://togami2864.github.io/',
+  integrations: [react(), mdx()],
+  // base: 'https://togami2864.github.io/',
 });

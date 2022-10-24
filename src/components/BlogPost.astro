@@ -1,6 +1,6 @@
 ---
 import Author from './Author.astro';
-import { Lang }from './Lang.tsx';
+import { Lang }from './Lang';
 
 export interface Props {
   title: string;
@@ -24,7 +24,7 @@ const isJaAvailable = lang == 'ja' || i18 == 'ja';
         <p class="publish-date">{publishDate}</p>
         <h1 class="title">{title}</h1>
         <Author name={author} href="https://twitter.com/togami2864" />
-        <Lang isJapanese={isJapanese} isEnAvailable={isEnAvailable} isJaAvailable={isJaAvailable} filename={filename} client:only/>
+        <Lang isJapanese={isJapanese} isEnAvailable={isEnAvailable} isJaAvailable={isJaAvailable} filename={filename} client:only="react"/>
       </header>
       <main>
         <slot />
