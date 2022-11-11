@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 
-export const LangSelector: React.FC = ({ initLang, translation }) => {
+export const LangSelector: React.FC = ({
+  initLang,
+  translation,
+}: {
+  initLang: string;
+  translation: string;
+}) => {
   const [lang, setLang] = useState(initLang);
   const changeLang = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setLang(e.target.value);
@@ -18,7 +24,7 @@ export const LangSelector: React.FC = ({ initLang, translation }) => {
 
   return (
     <select onChange={changeLang} value={lang}>
-      <option value="en" defaultValue>
+      <option value="en" defaultValue="🇺🇸">
         🇺🇸
       </option>
       <option value="ja">🇯🇵</option>
