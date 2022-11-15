@@ -10,69 +10,85 @@ const description = 'togami2864 profile';
 // TODO fix
 let permalink = 'https://togami2864.github.io/ja/';
 ---
-<Base title={title} description={description} permalink={permalink} lang='ja'>
-<section class="intro">
-          <h1 class="latest">Hi👋</h1>
-          <p>togami2864's website / <a href="/">英語版</a></p>
-        </section>
-        <section>
-          <h1 class="latest">🤔 Who am I?</h1>
-          <Markdown>
-            ### Student
-            東京で電子工学を専攻している大学3年生です。
 
-            ### Frontend developer
+<Base title={title} description={description} permalink={permalink} lang="ja">
+  <section class="intro">
+    <h1 class="latest">Hi👋</h1>
+    <p>togami2864's website / <a href="/">英語版</a></p>
+  </section>
+  <section>
+    <Markdown>
+      東京で電子工学を専攻している大学3年生です。
+      web関係のものとは全く関係ないCから始め、html/css、JavaScript、React.jsを学習しました。
+      また、フロントエンドエンジニアとしての業務の経験があります。
+    </Markdown>
+  </section>
+  <section>
+    <h1 class="latest">👻 Experiences</h1>
+    <Markdown>
+      ### Plaid(2022/05 ~ 2022/08)
+      Built inmemory query engine.
+      - Rust
+      - wasm
+      - arrow-rs
+      - TypeScript
 
-            web関係のものとは全く関係ないCから始め、html/css、JavaScript、React.jsを学習しました。
-            また、フロントエンドエンジニアとしての業務の経験があります。
-          </Markdown>
-        </section>
-        <section>
-          <h1 class="latest">🖥️ Skills</h1>
-          <Markdown>
-          - JavaScript/TypeScript, HTML/CSS
-          - React.js,Next.js
-          - Frontend testing(Jest, Cypress)
-          </Markdown>
-        </section>
-        <section>
-          <h1 class="latest">🐬 Activities</h1>
-          <Markdown>
-          OSS Contiributer
-          - aws-amplify/amplify-cli: [Log](https://github.com/pulls?q=involves%3Atogami2864+-user%3Atogami2864+repo%3Aaws-amplify%2Famplify-cli)
-          - rust-lang/rust-clippy: [Log](https://github.com/pulls?q=involves%3Atogami2864+-user%3Atogami2864+repo%3Arust-lang%2Frust-clippy)
-          - withastro/astro: [Log](https://github.com/pulls?q=involves%3Atogami2864+-user%3Atogami2864+repo%3Awithastro%2Fastro+)
+      ### CyberAgent(2022/02 1month)
+      Reserched the internal working of the JavaScript test library and improved the execution speed.
+      - JavaScript
+      - TypeScript
 
-          OSS Author
-          - react-ts-github-calendar: [github](https://github.com/togami2864/react-ts-github-calendar)
-          </Markdown>
-        </section>
-        <section>
-          <h1 class="latest">[WIP]Experiences</h1>
-          <Markdown>
-          ### CyberAgent,Inc(2022/02/02)
-          ### Merpay,Inc(2021/08 ~ 2021/09)
-          ### Cybozu,Inc(2021/08 1week)
-          </Markdown>
-        </section>
-        <section>
-          <h1 class="latest">❤️ Love</h1>
-          <Markdown>
-            - 💻 Programming
-            - 🌏 OSSへのコントリビュート
-            - 🎥 映画
-            - 🎤 Fear and loathing in Las Vegas ([watch on YouTube](https://www.youtube.com/watch?v=FLUC8aINF1c)/ [listen on spotify](https://open.spotify.com/artist/5iZSZ19Lnt6iQTDITRF7Mn))
-          </Markdown>
-        </section>
-        <section>
-          <h1 class="latest">✔️ Links</h1>
-          <a href="https://github.com/togami2864" target="_blank" rel="noopener noreferrer"><Github/></a>
-          <a href="https://github.com/togami2864" target="_blank" rel="noopener noreferrer"><Twitter/></a>
-        </section>
+      ### Merpay(2021/08 ~ 2021/09)
+      Added integration tests using Cypress to the dashboard for merchant review made with Nuxt.js.
+      - TypeScript
+      - Nuxt.js
+
+      ### Cybozu(2021/08 1week)
+      Created a monorepo in the repository using Clousure Tools. I selected the technology, implemented it, and also created the ADR(Architecture Descision Record).
+      - React
+      - TypeScript
+    </Markdown>
+  </section>
+  <section>
+    <h1 class="latest">🐬 Activities</h1>
+    <Markdown>
+      - vitest(js)
+        - [log](https://github.com/pulls?q=involves%3Atogami2864+-user%3Atogami2864+repo%3Avitest-dev%2Fvitest+)
+      - roapi(rust)
+        - [log](https://github.com/pulls?q=involves%3Atogami2864+-user%3Atogami2864+repo%3Aroapi%2Froapi)
+      - clippy(rust)
+        - [log](https://github.com/pulls?q=involves%3Atogami2864+-user%3Atogami2864+repo%3Arust-lang%2Frust-clippy)
+    </Markdown>
+  </section>
+
+  <section>
+    <h1 class="latest">✔️ Links</h1>
+    <a
+      href="https://github.com/togami2864"
+      target="_blank"
+      rel="noopener noreferrer"
+      ><Github />
+    </a>
+    <a
+      href="https://github.com/togami2864"
+      target="_blank"
+      rel="noopener noreferrer"
+      ><Twitter />
+    </a>
+  </section>
 </Base>
 
 <style>
-.intro { padding-bottom: 1rem; margin-bottom: 2rem; border-bottom:
-      4px solid var(--theme-divider); } .intro > * { margin: 0; } .latest {
-      font-size: 2.5rem; font-weight: 700; }
+  .intro {
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 4px solid var(--theme-divider);
+  }
+  .intro > * {
+    margin: 0;
+  }
+  .latest {
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
 </style>
