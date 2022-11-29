@@ -6,7 +6,7 @@ const title = 'togami2864';
 const description = 'Writing about tech & my daily life';
 let permalink = 'https://togami2864.github.io/blog/';
 
-let allPosts = await Astro.glob('./posts/*.mdx');
+let allPosts = await Astro.glob('./posts/(.en|.ja)?*.mdx');
 allPosts = allPosts.sort(
   (a, b) =>
     new Date(b.publishDate).valueOf() - new Date(a.publishDate).valueOf()
