@@ -9,7 +9,8 @@ let permalink = 'https://togami2864.github.io/blog/';
 let allPosts = await Astro.glob('./posts/(.en|.ja)?*.mdx');
 allPosts = allPosts.sort(
   (a, b) =>
-    new Date(b.publishDate).valueOf() - new Date(a.publishDate).valueOf()
+    new Date(b.frontmatter.publishDate).valueOf() -
+    new Date(a.frontmatter.publishDate).valueOf()
 );
 ---
 
