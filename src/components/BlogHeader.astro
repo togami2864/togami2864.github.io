@@ -1,5 +1,4 @@
 ---
-import { LangSelector } from '@components/LangSelector.tsx';
 const { lang , translation } = Astro.props;
 const linkToHome = lang == 'en' ? "/" : "/ja/";
 const linkToBlog = lang == 'en' ? "/blog" : "/ja/blog";
@@ -14,7 +13,6 @@ const linkToBlog = lang == 'en' ? "/blog" : "/ja/blog";
       <ul>
         <li><a href={linkToHome}>Home</a></li>
         <li><a href={linkToBlog}>Blog</a></li>
-        <LangSelector initLang={lang} translation={translation} client:load/>
       </ul>
       </nav>
     </h1>
