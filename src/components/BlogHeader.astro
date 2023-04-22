@@ -1,8 +1,9 @@
 ---
-const { lang , translation } = Astro.props;
-const linkToHome = lang == 'en' ? "/" : "/ja/";
-const linkToBlog = lang == 'en' ? "/blog" : "/ja/blog";
+const { lang, translation } = Astro.props;
+const linkToHome = '/';
+const linkToBlog = lang == 'en' ? '/blog' : '/ja/blog';
 ---
+
 <header class="layout">
   <article>
     <h1>
@@ -10,10 +11,10 @@ const linkToBlog = lang == 'en' ? "/blog" : "/ja/blog";
         <span>togami2864</span>
       </a>
       <nav>
-      <ul>
-        <li><a href={linkToHome}>Home</a></li>
-        <li><a href={linkToBlog}>Blog</a></li>
-      </ul>
+        <ul>
+          <li><a href={linkToHome}>Home</a></li>
+          <li><a href={linkToBlog}>Blog</a></li>
+        </ul>
       </nav>
     </h1>
   </article>
@@ -87,6 +88,6 @@ const linkToBlog = lang == 'en' ? "/blog" : "/ja/blog";
   }
 
   li:nth-child(2) {
-    margin-right:  0.8rem;
+    margin-right: 0.8rem;
   }
 </style>
