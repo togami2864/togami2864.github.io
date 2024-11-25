@@ -1,1 +1,1 @@
-/2024/sample1/*    /2024/sample1/index.html   200
+/2024/sample1,foo,/2024/sample1,foo/*    /2024/sample1,foo,/2024/sample1,foo/index.html   200
